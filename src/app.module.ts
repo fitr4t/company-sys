@@ -3,6 +3,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { DepartmentModule } from './departments/departments.module';
 import { UserModule } from './users/users.module';
 
 @Module({
@@ -15,7 +16,7 @@ import { UserModule } from './users/users.module';
         uri: config.get<string>('DB_CONNECTION'), // Loaded from .ENV
       })
     }),
-    UserModule
+    UserModule,DepartmentModule
   ],
   controllers: [AppController],
   providers: [AppService],
