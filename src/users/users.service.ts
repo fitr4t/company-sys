@@ -1,6 +1,7 @@
-import { Injectable } from "@nestjs/common";
+import { Body, Injectable, Post } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
+import { CreateUserDto } from "./createUser.dto";
 import { User } from "./users.schema";
 
 @Injectable()
@@ -9,7 +10,12 @@ export class UserService{
     @InjectModel(User.name) private readonly userModel: Model<User>
   ){}
 
-  createUser() {}
+  @Post()
+  createUser(@Body() dto:CreateUserDto) {
+    const user = new this.userModel(dto);
+    return user.save();
+
+  }
   deleteUser() {}
   getUser() {}
   getUsers() {}
@@ -20,4 +26,5 @@ export class UserService{
   getDepartments() {}
   updateDepartment() {}
   assignUserToDepartment() {}
+
 }
