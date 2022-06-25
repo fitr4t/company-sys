@@ -21,4 +21,10 @@ export class DepartmentService {
   findAll() {
     return this.departmentModel.find();
   }
+  findOne(id: number) {
+    if (!id) {
+      return null;
+    }
+    return this.departmentModel.findOne({ id });
+  }
 }
