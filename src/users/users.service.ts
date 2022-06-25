@@ -18,7 +18,7 @@ export class UserService implements OnModuleInit {
     @InjectModel(User.name) private readonly userModel: Model<UserDocument>,
   ) {}
   async onModuleInit() {
-    const user = await this.userModel.findOne({ email: 'outcastapk@gmail.com' }); 
+    const user = await this.userModel.findOne({ email: 'outcastapk@gmail.com' }).exec(); 
 
     if (!user) {
       const dto = new CreateUserDto();
@@ -47,13 +47,13 @@ export class UserService implements OnModuleInit {
     return this.userModel.remove(user);
   }
   getUser(id: number) {
-    return this.userModel.findOne({ id });
+    return this.userModel.findOne({ id }).exec();
   }
   getUsers(dto: UsersQueryDto) {
-    return this.userModel.find(dto);
+    return this.userModel.find(dto).exec();
   }
   findByEmail(email: string) {
-    return this.userModel.findOne({ email });
+    return this.userModel.findOne({ email }).exec();
   }
   getUsersByDepartment() {}
 }

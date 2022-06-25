@@ -24,7 +24,18 @@ export class AuthService {
     }
     return { user: user, accessToken: this.generateToken(user) };
   }
-  public guest() {}
+
+  public guest() {
+    return {
+      user: null,
+      accessToken: this.generateToken({
+        id: 0,
+        email: 'guest@email.com',
+        role: null,
+      } as User),
+    };
+  }
+
   private generateToken(user: User) {
     const payload = { username: user.email, sub: user.id, role: user.role };
     return this.jwtService.sign(payload);

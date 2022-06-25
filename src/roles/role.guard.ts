@@ -23,7 +23,16 @@ export class RoleGuard implements CanActivate {
     const userPermissions = this.rolesService.getPermissionsByRole(userRole);
     return this.matchRoles(permissions, userPermissions);
   }
-  private matchRoles(permissions: Permission[], userPermissions: Permission[]) {
+  private matchRoles(permissions: Permission[], userPermissions: Permission[]): boolean {
+    for (let permission of permissions) {
+      const found = userPermissions.find((item) => {
+        return permission === item;
+      });
+
+      if (!found) {
+        return false;
+      }
+    }
     return true;
   }
 }
