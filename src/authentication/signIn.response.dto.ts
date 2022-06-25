@@ -1,6 +1,6 @@
-import { User } from "src/users/users.schema";
+import { User } from 'src/users/users.schema';
 
-export class SignInResponseDto{
+export class SignInResponseDto {
   user: User;
   accessToken: string;
 }
