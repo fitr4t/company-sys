@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
+import { AuthModule } from './authentication/authentication.module';
 import { DepartmentModule } from './departments/departments.module';
 import { RolesModule } from './roles/roles.module';
 import { UserModule } from './users/users.module';
@@ -16,6 +17,7 @@ import { UserModule } from './users/users.module';
       }),
     }),
     UserModule,
+    AuthModule,
     DepartmentModule,
     RolesModule,
   ],

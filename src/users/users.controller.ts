@@ -6,7 +6,6 @@ import { User } from './users.schema';
 @Controller('users')
 export class UsersController {
   constructor(
-    @InjectModel(User.name) private readonly userModel: Model<User>,
   ) {}
 
   

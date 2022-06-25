@@ -2,13 +2,13 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { CreateDepartmentDto } from './createDepartment.dto';
-import { Department } from './departments.schema';
+import { Department, DepartmentDocument } from './departments.schema';
 
 @Injectable()
 export class DepartmentService {
   constructor(
     @InjectModel(Department.name)
-    private readonly departmentModel: Model<Department>,
+    private readonly departmentModel: Model<DepartmentDocument>,
   ) {}
 
   createDepartment(dto: CreateDepartmentDto) {
@@ -22,9 +22,6 @@ export class DepartmentService {
     return this.departmentModel.find();
   }
   findOne(id: number) {
-    if (!id) {
-      return null;
-    }
     return this.departmentModel.findOne({ id });
   }
 }

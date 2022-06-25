@@ -1,13 +1,13 @@
-import { Body, Injectable, NotFoundException, Post } from "@nestjs/common";
+import { Body, Injectable, NotFoundException } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
 import { CreateUserDto } from "./createUser.dto";
-import { User } from "./users.schema";
+import { User, UserDocument } from "./users.schema";
 
 @Injectable()
 export class UserService{
   constructor(
-    @InjectModel(User.name) private readonly userModel: Model<User>
+    @InjectModel(User.name) private readonly userModel: Model<UserDocument>
   ){}
 
   createUser(@Body() dto:CreateUserDto) {
