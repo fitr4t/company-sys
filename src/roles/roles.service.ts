@@ -32,6 +32,10 @@ export class RolesService {
         Permission.UPDATE_OWN_DEPARTMENT,
       ],
     },
+    {
+      role: Role.EMPLOYEE,
+      permissions: [Permission.MANAGE_OWN_TASKS],
+    },
   ];
   public getPermissionsByRole(role: Role): Permission[] {
     return this.rolesPermissions.find((item) => {
