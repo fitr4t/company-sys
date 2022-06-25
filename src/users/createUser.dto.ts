@@ -1,5 +1,6 @@
 import { Optional } from '@nestjs/common';
 import { IsEmail, IsNotEmpty } from 'class-validator';
+import { Role } from 'src/roles/role.enum';
 
 export class CreateUserDto {
   @IsNotEmpty()
@@ -16,7 +17,7 @@ export class CreateUserDto {
   department: string;
 
   @IsNotEmpty()
-  role: string;
+  role: Role;
 
   @IsEmail()
   email: string;

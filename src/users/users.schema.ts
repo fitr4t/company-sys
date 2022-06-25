@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
+import { Role } from 'src/roles/role.enum';
 
 export type UserDocument = User & Document;
 @Schema()
@@ -7,7 +8,7 @@ export class User {
   @Prop()
   id: number;
 
-  @Prop()
+  @Prop({ unique: true })
   username: string;
 
   @Prop()
@@ -19,11 +20,11 @@ export class User {
   @Prop()
   lastName: string;
 
-  @Prop()
+  @Prop({ unique: true })
   email: string;
 
   @Prop()
-  role: string;
+  role: Role;
 
   @Prop()
   department: string;

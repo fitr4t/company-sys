@@ -22,7 +22,7 @@ export class DepartmentController {
   }
 
   @Delete(':id')
-  delete(@Param('id') id: number) {
+  delete(@Param('id') id: string) {
     return this.departmentService.deleteDepartment(id);
   }
 }

@@ -15,13 +15,17 @@ export class DepartmentService {
     const department = new this.departmentModel(dto);
     return department.save();
   }
-  async deleteDepartment(id: number) {
+  async deleteDepartment(id: string) {
     return this.departmentModel.findOneAndRemove({ id });
   }
   findAll() {
     return this.departmentModel.find();
   }
-  findOne(id: number) {
+  findOne(id: string) {
     return this.departmentModel.findOne({ id });
+  }
+  updateDepartment(id:string) {}
+  assignUserToDepartment(userId:string, departmentId:string) {
+
   }
 }
