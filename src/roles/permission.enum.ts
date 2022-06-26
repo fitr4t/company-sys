@@ -1,4 +1,4 @@
-export enum Permission{
+export enum Permission {
   CREATE_USER,
   DELETE_USER,
   FIND_USER,
@@ -11,5 +11,5 @@ export enum Permission{
   LIST_DEPARTMENTS,
   LIST_DEPARTMENT_USERS,
   UPDATE_OWN_DEPARTMENT,
-  MANAGE_OWN_TASKS
+  MANAGE_OWN_TASKS,
 }
