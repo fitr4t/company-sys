@@ -11,11 +11,14 @@ import { hash } from 'bcrypt';
 import { CreateUserDto } from './createUser.dto';
 import { UsersQueryDto } from './users.query.dto';
 import { User, UserDocument } from './users.schema';
+import { DepartmentDocument, Department } from 'src/departments/departments.schema';
 
 @Injectable()
 export class UserService implements OnModuleInit {
   constructor(
     @InjectModel(User.name) private readonly userModel: Model<UserDocument>,
+    @InjectModel(Department.name)
+    private readonly departmentModel: Model<DepartmentDocument>,
   ) {}
   async onModuleInit() {
     const user = await this.userModel
@@ -42,10 +45,10 @@ export class UserService implements OnModuleInit {
     return user.save();
   }
   async deleteUser(id: string) {
-    return this.userModel.findOneAndRemove({ _id:id }).orFail();
+    return this.userModel.findByIdAndRemove(id).orFail();
   }
   getUser(id: string) {
-    return this.userModel.findOne({ _id:id }).orFail();
+    return this.userModel.findById(id).orFail();
   }
   getUsers(dto: UsersQueryDto) {
     return this.userModel.find(dto).exec();
@@ -53,7 +56,8 @@ export class UserService implements OnModuleInit {
   findByEmail(email: string) {
     return this.userModel.findOne({ email }).orFail();
   }
-  getUsersByDepartment(departmentId: string) {
-    return this.userModel.find({ department: { _id: departmentId } });
+  async getUsersByDepartment(departmentId: string) {
+    const department = await this.departmentModel.findById(departmentId).orFail();
+    return this.userModel.find({ department:department });
   }
 }

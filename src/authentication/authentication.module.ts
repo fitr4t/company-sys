@@ -8,6 +8,7 @@ import { Constants } from './constansts';
 import { JwtStrategy } from './jwt.strategy';
 import { MongooseModule } from '@nestjs/mongoose';
 import { User, UserSchema } from 'src/users/users.schema';
+import { Department, DepartmentSchema } from 'src/departments/departments.schema';
 
 @Module({
   imports: [
@@ -16,6 +17,10 @@ import { User, UserSchema } from 'src/users/users.schema';
         name: User.name,
         schema: UserSchema,
       },
+      {
+        name: Department.name,
+        schema: DepartmentSchema,
+      }
     ]),
     PassportModule,
     JwtModule.register({
