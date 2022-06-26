@@ -12,6 +12,7 @@ import {
 import { JwtAuthGuard } from 'src/authentication/jwt.guard';
 import { RequiresPermissions } from 'src/roles/permission.decorator';
 import { Permission } from 'src/roles/permission.enum';
+import { AssignUserToDepartmentDto } from './assignUserToDepartment.dto';
 import { CreateDepartmentDto } from './createDepartment.dto';
 import { DepartmentService } from './departments.service';
 import { UpdateDepartmentDto } from './updateDepartment.dto';
@@ -49,5 +50,14 @@ export class DepartmentController {
   @RequiresPermissions(Permission.UPDATE_DEPARTMENT)
   update(@Param('id') id: string, @Body() dto: UpdateDepartmentDto) {
     return this.departmentService.updateDepartment(id, dto);
+  }
+
+  @Post(':id/assign')
+  @RequiresPermissions(Permission.ASSIGN_USER_TO_DEPARTMENT)
+  assignUserToDepartment(
+    @Param('id') id: string,
+    @Body() dto: AssignUserToDepartmentDto,
+  ) {
+    return this.departmentService.assignUserToDepartment(dto.userId, id);
   }
 }
