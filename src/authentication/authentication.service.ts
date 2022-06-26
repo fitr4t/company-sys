@@ -29,7 +29,7 @@ export class AuthService {
     return {
       user: null,
       accessToken: this.generateToken({
-        id: 0,
+        id: '0',
         email: 'guest@email.com',
         role: null,
       } as User),

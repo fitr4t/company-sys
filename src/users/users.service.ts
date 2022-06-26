@@ -18,7 +18,9 @@ export class UserService implements OnModuleInit {
     @InjectModel(User.name) private readonly userModel: Model<UserDocument>,
   ) {}
   async onModuleInit() {
-    const user = await this.userModel.findOne({ email: 'outcastapk@gmail.com' }).exec(); 
+    const user = await this.userModel
+      .findOne({ email: 'outcastapk@gmail.com' })
+      .exec();
 
     if (!user) {
       const dto = new CreateUserDto();
@@ -37,23 +39,21 @@ export class UserService implements OnModuleInit {
   async createUser(dto: CreateUserDto) {
     dto.password = await hash(dto.password, 5);
     const user = new this.userModel(dto);
-    return user.save(); 
+    return user.save();
   }
-  async deleteUser(id: number) {
-    const user = await this.getUser(id);
-    if (!user) {
-      throw new NotFoundException('user not found');
-    }
-    return this.userModel.remove(user);
+  async deleteUser(id: string) {
+    return this.userModel.findOneAndRemove({ id }).orFail();
   }
-  getUser(id: number) {
-    return this.userModel.findOne({ id }).exec();
+  getUser(id: string) {
+    return this.userModel.findOne({ id }).orFail();
   }
   getUsers(dto: UsersQueryDto) {
     return this.userModel.find(dto).exec();
   }
   findByEmail(email: string) {
-    return this.userModel.findOne({ email }).exec();
+    return this.userModel.findOne({ email }).orFail();
   }
-  getUsersByDepartment() {}
+  getUsersByDepartment(departmentId: string) {
+    return this.userModel.find({ department: { id: departmentId } });
+  }
 }
