@@ -6,8 +6,6 @@ import { Role } from 'src/roles/role.enum';
 export type UserDocument = User & mongoose.Document;
 @Schema()
 export class User {
-  @Prop()
-  _id: string;
 
   @Prop({ unique: true })
   username: string;

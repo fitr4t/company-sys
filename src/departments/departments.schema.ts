@@ -1,10 +1,11 @@
-import { Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 
 export type DepartmentDocument = Department & Document;
 @Schema()
 export class Department {
-  _id: number;
+  @Prop()
   name: string;
+  @Prop()
   description: string;
 }
 
