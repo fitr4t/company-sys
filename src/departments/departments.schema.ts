@@ -3,7 +3,7 @@ import { Schema, SchemaFactory } from '@nestjs/mongoose';
 export type DepartmentDocument = Department & Document;
 @Schema()
 export class Department {
-  id: number;
+  _id: number;
   name: string;
   description: string;
 }

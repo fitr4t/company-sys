@@ -29,7 +29,7 @@ export class AuthService {
     return {
       user: null,
       accessToken: this.generateToken({
-        id: '0',
+        _id: '0',
         email: 'guest@email.com',
         role: null,
       } as User),
@@ -37,7 +37,7 @@ export class AuthService {
   }
 
   private generateToken(user: User) {
-    const payload = { username: user.email, sub: user.id, role: user.role };
+    const payload = { username: user.email, sub: user._id, role: user.role };
     return this.jwtService.sign(payload);
   }
 }

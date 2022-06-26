@@ -20,13 +20,13 @@ export class DepartmentService {
     return department.save();
   }
   async deleteDepartment(id: string) {
-    return this.departmentModel.findOneAndRemove({ id });
+    return this.departmentModel.findOneAndRemove({ _id:id });
   }
   findAll() {
     return this.departmentModel.find();
   }
   findOne(id: string) {
-    return this.departmentModel.findOne({ id }).orFail();
+    return this.departmentModel.findOne({ _id:id }).orFail();
   }
   async updateDepartment(id: string, dto: UpdateDepartmentDto) {
     const department = await this.findOne(id);
@@ -39,7 +39,7 @@ export class DepartmentService {
     return department.save();
   }
   async assignUserToDepartment(userId: string, departmentId: string) {
-    const user = await this.userModel.findOne({ userId });
+    const user = await this.userModel.findOne({ _id:userId });
     const department = await this.findOne(departmentId);
     user.department = department;
     return user.save();

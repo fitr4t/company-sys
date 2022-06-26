@@ -42,10 +42,10 @@ export class UserService implements OnModuleInit {
     return user.save();
   }
   async deleteUser(id: string) {
-    return this.userModel.findOneAndRemove({ id }).orFail();
+    return this.userModel.findOneAndRemove({ _id:id }).orFail();
   }
   getUser(id: string) {
-    return this.userModel.findOne({ id }).orFail();
+    return this.userModel.findOne({ _id:id }).orFail();
   }
   getUsers(dto: UsersQueryDto) {
     return this.userModel.find(dto).exec();
@@ -54,6 +54,6 @@ export class UserService implements OnModuleInit {
     return this.userModel.findOne({ email }).orFail();
   }
   getUsersByDepartment(departmentId: string) {
-    return this.userModel.find({ department: { id: departmentId } });
+    return this.userModel.find({ department: { _id: departmentId } });
   }
 }
